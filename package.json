@@ -1,0 +1,12 @@
+{
+  "name": "library-manager-packages",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Public package repository for Library Manager for Venus 6",
+  "scripts": {
+    "build": "node build-catalog.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16"
+  }
+}
