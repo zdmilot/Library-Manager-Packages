@@ -71,39 +71,167 @@ if (!fs.existsSync(pkgDir)) {
     fs.mkdirSync(pkgDir, { recursive: true });
 }
 
-const files = fs.readdirSync(pkgDir).filter(f => f.toLowerCase().endsWith('.hxlibpkg'));
-const catalog = [];
+/**
+ * Collect .hxlibpkg files from library subdirectories under packages/.
+ * Structure:  packages/<LibraryName>/<file>.hxlibpkg
+ * Falls back to flat files in packages/ for backward compatibility.
+ */
+function collectPackageFiles() {
+    const results = [];
+    const entries = fs.readdirSync(pkgDir, { withFileTypes: true });
 
-for (const file of files) {
-    const filePath = path.join(pkgDir, file);
+    for (const ent of entries) {
+        if (ent.isDirectory()) {
+            // Scan subdirectory for .hxlibpkg files
+            const subDir = path.join(pkgDir, ent.name);
+            const subFiles = fs.readdirSync(subDir).filter(f => f.toLowerCase().endsWith('.hxlibpkg'));
+            for (const f of subFiles) {
+                results.push({ dir: ent.name, file: f, filePath: path.join(subDir, f) });
+            }
+        } else if (ent.name.toLowerCase().endsWith('.hxlibpkg')) {
+            // Backward compatibility: flat file in packages/
+            results.push({ dir: null, file: ent.name, filePath: path.join(pkgDir, ent.name) });
+        }
+    }
+    return results;
+}
+
+/**
+ * Compare two version strings.  Returns positive if a > b, negative if a < b, 0 if equal.
+ * Handles dotted numeric versions (e.g. "1.8.4" vs "1.10.0").
+ */
+function compareVersions(a, b) {
+    const pa = String(a).split('.').map(Number);
+    const pb = String(b).split('.').map(Number);
+    const len = Math.max(pa.length, pb.length);
+    for (let i = 0; i < len; i++) {
+        const na = pa[i] || 0;
+        const nb = pb[i] || 0;
+        if (na !== nb) return na - nb;
+    }
+    return 0;
+}
+
+const pkgFiles = collectPackageFiles();
+
+// Collect all version entries grouped by library_name
+const libraryMap = new Map(); // library_name → array of version entries
+
+for (const { dir, file, filePath: fp } of pkgFiles) {
     try {
-        const raw    = fs.readFileSync(filePath);
+        const raw    = fs.readFileSync(fp);
         const zipBuf = unpackContainer(raw);
         const zip    = new AdmZip(zipBuf);
         const entry  = zip.getEntry('manifest.json');
         if (!entry) { console.warn(`SKIP ${file}: no manifest.json`); continue; }
 
         const m = JSON.parse(zip.readAsText(entry));
-        catalog.push({
-            package_file:         file,
-            library_name:         m.library_name  || '',
-            author:               m.author        || '',
-            organization:         m.organization  || '',
-            version:              m.version       || '',
-            description:          m.description   || '',
-            tags:                 m.tags           || [],
-            venus_compatibility:  m.venus_compatibility || '',
-            github_url:           m.github_url    || '',
-            created_date:         m.created_date  || '',
-            library_image_base64: m.library_image_base64 || '',
-            library_image_mime:   m.library_image_mime   || ''
+        const libName = m.library_name || '';
+        const version = m.version      || '';
+
+        // Auto-detect .chm help files from library_files
+        const rawLibFiles = m.library_files || [];
+        const declaredHelp = m.help_files || [];
+        const helpFiles = declaredHelp.slice();
+        const libraryFiles = [];
+        rawLibFiles.forEach(f => {
+            if (path.extname(f).toLowerCase() === '.chm') {
+                if (helpFiles.indexOf(f) === -1) helpFiles.push(f);
+            } else {
+                libraryFiles.push(f);
+            }
         });
-        console.log(`OK  ${file}  →  ${m.library_name} v${m.version}`);
+
+        const versionEntry = {
+            package_file:          file,
+            version:               version,
+            author:                m.author             || '',
+            organization:          m.organization       || '',
+            description:           m.description        || '',
+            tags:                  m.tags               || [],
+            venus_compatibility:   m.venus_compatibility || '',
+            github_url:            m.github_url         || '',
+            created_date:          m.created_date       || '',
+            library_files:         libraryFiles,
+            demo_method_files:     m.demo_method_files  || [],
+            help_files:            helpFiles,
+            bin_files:             m.bin_files           || [],
+            labware_files:         m.labware_files       || [],
+            com_register_dlls:     m.com_register_dlls   || [],
+            install_to_library_root: !!m.install_to_library_root,
+            custom_install_subdir: m.custom_install_subdir || '',
+            dependencies:          m.dependencies        || [],
+            library_image_base64:  m.library_image_base64 || '',
+            library_image_mime:    m.library_image_mime   || ''
+        };
+
+        if (!libraryMap.has(libName)) libraryMap.set(libName, []);
+        libraryMap.get(libName).push(versionEntry);
+
+        const displayPath = dir ? `${dir}/${file}` : file;
+        console.log(`OK  ${displayPath}  →  ${libName} v${version}`);
     } catch (err) {
-        console.error(`ERR ${file}: ${err.message}`);
+        const displayPath = dir ? `${dir}/${file}` : file;
+        console.error(`ERR ${displayPath}: ${err.message}`);
     }
+}
+
+// Build catalog: one entry per library with all versions included
+const catalog = [];
+for (const [libName, versions] of libraryMap) {
+    // Sort versions newest first
+    versions.sort((a, b) => compareVersions(b.version, a.version));
+    const latest = versions[0];
+
+    const catalogEntry = {
+        library_name:          libName,
+        package_file:          latest.package_file,
+        version:               latest.version,
+        author:                latest.author,
+        organization:          latest.organization,
+        description:           latest.description,
+        tags:                  latest.tags,
+        venus_compatibility:   latest.venus_compatibility,
+        github_url:            latest.github_url,
+        created_date:          latest.created_date,
+        library_image_base64:  latest.library_image_base64,
+        library_image_mime:    latest.library_image_mime,
+        library_files:         latest.library_files,
+        demo_method_files:     latest.demo_method_files,
+        help_files:            latest.help_files,
+        bin_files:             latest.bin_files,
+        labware_files:         latest.labware_files,
+        com_register_dlls:     latest.com_register_dlls,
+        install_to_library_root: latest.install_to_library_root,
+        custom_install_subdir: latest.custom_install_subdir,
+        dependencies:          latest.dependencies,
+        versions:              versions.map(v => ({
+            version:               v.version,
+            package_file:          v.package_file,
+            created_date:          v.created_date,
+            author:                v.author,
+            organization:          v.organization,
+            description:           v.description,
+            tags:                  v.tags,
+            venus_compatibility:   v.venus_compatibility,
+            github_url:            v.github_url,
+            library_files:         v.library_files,
+            demo_method_files:     v.demo_method_files,
+            help_files:            v.help_files,
+            bin_files:             v.bin_files,
+            labware_files:         v.labware_files,
+            com_register_dlls:     v.com_register_dlls,
+            install_to_library_root: v.install_to_library_root,
+            custom_install_subdir: v.custom_install_subdir,
+            dependencies:          v.dependencies
+        }))
+    };
+
+    catalog.push(catalogEntry);
+    const verList = versions.map(v => 'v' + v.version).join(', ');
+    console.log(`  ${libName}: ${versions.length} version(s) [${verList}]`);
 }
 
 catalog.sort((a, b) => a.library_name.localeCompare(b.library_name));
 fs.writeFileSync(catalogOut, JSON.stringify(catalog, null, 2));
-console.log(`\nWrote catalog.json with ${catalog.length} package(s).`);
+console.log(`\nWrote catalog.json with ${catalog.length} librar${catalog.length !== 1 ? 'ies' : 'y'}.`);
