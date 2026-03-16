@@ -5,6 +5,9 @@ on:
     paths:
       - 'packages/**'
 
+permissions:
+  contents: write
+
 jobs:
   rebuild-catalog:
     runs-on: windows-latest
