@@ -1,6 +1,7 @@
 name: Rebuild Package Catalog
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'packages/**'
