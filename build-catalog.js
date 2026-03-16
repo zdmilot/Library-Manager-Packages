@@ -126,7 +126,10 @@ for (const { dir, file, filePath: fp } of pkgFiles) {
         if (!entry) { console.warn(`SKIP ${file}: no manifest.json`); continue; }
 
         const m = JSON.parse(zip.readAsText(entry));
-        const libName = m.library_name || '';
+        // Use subdirectory name as grouping key when available, so that
+        // multiple versions with divergent manifest library_name values
+        // (e.g. "HSLAppsLib", "HSLAppsLib_V1_6") are treated as one library.
+        const libName = dir || m.library_name || '';
         const version = m.version      || '';
 
         // Auto-detect .chm help files from library_files
