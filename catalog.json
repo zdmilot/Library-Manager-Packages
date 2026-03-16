@@ -310,6 +310,259 @@
     ]
   },
   {
+    "library_name": "HSLAppsLib",
+    "package_file": "HSLAppsLib_v1.5.hxlibpkg",
+    "version": "1.5",
+    "author": "Scott Walton",
+    "organization": "Hanilton",
+    "description": "To provide a list of popular hsl functions in one library with additional error \nrecovery.",
+    "tags": [
+      "array",
+      "lookup",
+      "search",
+      "typecheck",
+      "string",
+      "number",
+      "convert",
+      "concatenate",
+      "substring",
+      "length",
+      "rounding",
+      "math"
+    ],
+    "venus_compatibility": "4.7+",
+    "github_url": "",
+    "created_date": "2026-03-16T16:53:37.516Z",
+    "library_image_base64": "Qk2CCwAAAAAAAIoAAAB8AAAAGwAAABoAAAABACAAAwAAAPgKAAASCwAAEgsAAAAAAAAAAAAAAAD/AAD/AAD/AAAAAAAA/wEAAAAAAAAAAAAAAFS4HvwAAAAAAAAAAGlmZvwAAAAAAAAAAMT1KP8AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA////AP///wD///8AAAAAEAAAALAAAAAw////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAAAQAAAA0AAAAP8AAADQAAAAEP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAABAAAADQAAAA/wAAAP8AAAD/AAAA0AAAABD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAEAAAANAAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAKD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAkAAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAACg////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAKAAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAYP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAACAAAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAGD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAYAAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAPAAAAAw////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAEAAAADwAAAA/wAAAP8AAAD/AAAA/wAAAP8AAADwAAAAMP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAAAwAAAA8AAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA0AAAABD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAEAAAANAAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAND///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAABA////AP///wD///8A////AP///wD///8A////AAAAABAAAADAAAAA/wAAAP8AAAD/AAAA/wAAAKD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAACw////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAoAAAAP8AAAD/AAAA/wAAAP8AAABg////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAABAAAAD/////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAIAAAABwAAAA0AAAAP8AAAD/AAAAYP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAIAAAAD/////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAEAAAANAAAAD/AAAA/wAAAGD///8A////AP///wD///8A////AP///wD///8AAAAAIAAAAPAAAADA////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAABAAAADQAAAA/wAAAP8AAABg////AP///wD///8A////AP///wD///8AAAAAwAAAAP8AAABw////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAAAQAAAA0AAAAP8AAAD/AAAAYP///wAAAAAgAAAAQP///wAAAACgAAAA/wAAAP8AAAAg////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAEAAAANAAAAD/AAAA/wAAAIAAAAD/AAAA/wAAAOAAAAD/AAAA/wAAAID///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAABAAAADQAAAAwAAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA0P///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAABgAAAA/wAAAP8AAAD/AAAA/wAAAP8AAADQAAAAEP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAAD/AAAA/wAAAP8AAAD/AAAA/wAAANAAAAAQ////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAAD/AAAA/wAAAP8AAAD/AAAA0AAAABD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAABgAAAA/wAAAP8AAAD/AAAA/wAAAP8AAADQAAAAEP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wAAAACgAAAA/wAAAP8AAAD/AAAAcAAAAEAAAAAQ////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AAAAAoAAAAP8AAAD/AAAAQP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAKAAAADQAAAAEP///wD///8A////AP///wD///8A////AP///wD///8A",
+    "library_image_mime": "image/bmp",
+    "library_files": [
+      "HSLAppsLib.bmp",
+      "HSLAppsLib.chw",
+      "HSLAppsLib.hsl",
+      "HSLAppsLib.stp"
+    ],
+    "demo_method_files": [],
+    "help_files": [
+      "HSLAppsLib.chm"
+    ],
+    "bin_files": [],
+    "labware_files": [],
+    "com_register_dlls": [],
+    "install_to_library_root": false,
+    "custom_install_subdir": "",
+    "dependencies": [],
+    "versions": [
+      {
+        "version": "1.5",
+        "package_file": "HSLAppsLib_v1.5.hxlibpkg",
+        "created_date": "2026-03-16T16:53:37.516Z",
+        "author": "Scott Walton",
+        "organization": "Hanilton",
+        "description": "To provide a list of popular hsl functions in one library with additional error \nrecovery.",
+        "tags": [
+          "array",
+          "lookup",
+          "search",
+          "typecheck",
+          "string",
+          "number",
+          "convert",
+          "concatenate",
+          "substring",
+          "length",
+          "rounding",
+          "math"
+        ],
+        "venus_compatibility": "4.7+",
+        "github_url": "",
+        "library_files": [
+          "HSLAppsLib.bmp",
+          "HSLAppsLib.chw",
+          "HSLAppsLib.hsl",
+          "HSLAppsLib.stp"
+        ],
+        "demo_method_files": [],
+        "help_files": [
+          "HSLAppsLib.chm"
+        ],
+        "bin_files": [],
+        "labware_files": [],
+        "com_register_dlls": [],
+        "install_to_library_root": false,
+        "custom_install_subdir": "",
+        "dependencies": []
+      }
+    ]
+  },
+  {
+    "library_name": "HSLAppsLib_V1_6",
+    "package_file": "HSLAppsLib_v1.6.hxlibpkg",
+    "version": "1.6",
+    "author": "Scott Walton",
+    "organization": "Hamilton",
+    "description": "To provide a list of popular hsl functions in one library with additional error \nrecovery.",
+    "tags": [
+      "array",
+      "lookup",
+      "search",
+      "typecheck",
+      "string",
+      "number",
+      "convert",
+      "concatenate",
+      "substring",
+      "length",
+      "rounding",
+      "math"
+    ],
+    "venus_compatibility": "4.7+",
+    "github_url": "",
+    "created_date": "2026-03-16T16:56:05.197Z",
+    "library_image_base64": "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",
+    "library_image_mime": "image/bmp",
+    "library_files": [
+      "HSLAppsLib_V1_6.bmp",
+      "HSLAppsLib_V1_6.hsl",
+      "HSLAppsLib_V1_6.stp"
+    ],
+    "demo_method_files": [],
+    "help_files": [
+      "HSLAppsLib_V1_6.chm"
+    ],
+    "bin_files": [],
+    "labware_files": [],
+    "com_register_dlls": [],
+    "install_to_library_root": false,
+    "custom_install_subdir": "",
+    "dependencies": [],
+    "versions": [
+      {
+        "version": "1.6",
+        "package_file": "HSLAppsLib_v1.6.hxlibpkg",
+        "created_date": "2026-03-16T16:56:05.197Z",
+        "author": "Scott Walton",
+        "organization": "Hamilton",
+        "description": "To provide a list of popular hsl functions in one library with additional error \nrecovery.",
+        "tags": [
+          "array",
+          "lookup",
+          "search",
+          "typecheck",
+          "string",
+          "number",
+          "convert",
+          "concatenate",
+          "substring",
+          "length",
+          "rounding",
+          "math"
+        ],
+        "venus_compatibility": "4.7+",
+        "github_url": "",
+        "library_files": [
+          "HSLAppsLib_V1_6.bmp",
+          "HSLAppsLib_V1_6.hsl",
+          "HSLAppsLib_V1_6.stp"
+        ],
+        "demo_method_files": [],
+        "help_files": [
+          "HSLAppsLib_V1_6.chm"
+        ],
+        "bin_files": [],
+        "labware_files": [],
+        "com_register_dlls": [],
+        "install_to_library_root": false,
+        "custom_install_subdir": "",
+        "dependencies": []
+      }
+    ]
+  },
+  {
+    "library_name": "HSLAppsLib_V1_7",
+    "package_file": "HSLAppsLib_v1.7.hxlibpkg",
+    "version": "1.7",
+    "author": "Scott Walton",
+    "organization": "Hamilton",
+    "description": "To provide a list of popular hsl functions in one library with additional error \nrecovery.",
+    "tags": [
+      "array",
+      "lookup",
+      "search",
+      "typecheck",
+      "string",
+      "number",
+      "convert",
+      "concatenate",
+      "substring",
+      "length",
+      "rounding",
+      "math"
+    ],
+    "venus_compatibility": "4.7+",
+    "github_url": "",
+    "created_date": "2026-03-16T17:03:14.769Z",
+    "library_image_base64": "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",
+    "library_image_mime": "image/bmp",
+    "library_files": [
+      "HSLAppsLib_V1_7.bmp",
+      "HSLAppsLib_V1_7.chw",
+      "HSLAppsLib_V1_7.hsl",
+      "HSLAppsLib_V1_7.stp"
+    ],
+    "demo_method_files": [],
+    "help_files": [
+      "HSLAppsLib_V1_7.chm"
+    ],
+    "bin_files": [],
+    "labware_files": [],
+    "com_register_dlls": [],
+    "install_to_library_root": false,
+    "custom_install_subdir": "",
+    "dependencies": [],
+    "versions": [
+      {
+        "version": "1.7",
+        "package_file": "HSLAppsLib_v1.7.hxlibpkg",
+        "created_date": "2026-03-16T17:03:14.769Z",
+        "author": "Scott Walton",
+        "organization": "Hamilton",
+        "description": "To provide a list of popular hsl functions in one library with additional error \nrecovery.",
+        "tags": [
+          "array",
+          "lookup",
+          "search",
+          "typecheck",
+          "string",
+          "number",
+          "convert",
+          "concatenate",
+          "substring",
+          "length",
+          "rounding",
+          "math"
+        ],
+        "venus_compatibility": "4.7+",
+        "github_url": "",
+        "library_files": [
+          "HSLAppsLib_V1_7.bmp",
+          "HSLAppsLib_V1_7.chw",
+          "HSLAppsLib_V1_7.hsl",
+          "HSLAppsLib_V1_7.stp"
+        ],
+        "demo_method_files": [],
+        "help_files": [
+          "HSLAppsLib_V1_7.chm"
+        ],
+        "bin_files": [],
+        "labware_files": [],
+        "com_register_dlls": [],
+        "install_to_library_root": false,
+        "custom_install_subdir": "",
+        "dependencies": []
+      }
+    ]
+  },
+  {
     "library_name": "HSLExtensions",
     "package_file": "HSLExtensions_v4.3.hxlibpkg",
     "version": "4.3",
