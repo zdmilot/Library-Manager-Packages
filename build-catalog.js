@@ -64,7 +64,7 @@ function unpackContainer(buf) {
 
 /* ── Main ─────────────────────────────────────────────────────────── */
 
-const pkgDir     = path.join(__dirname, 'packages');
+const pkgDir     = path.join(__dirname, 'Packages');
 const catalogOut = path.join(__dirname, 'catalog.json');
 
 if (!fs.existsSync(pkgDir)) {
