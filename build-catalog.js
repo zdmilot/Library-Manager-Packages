@@ -72,9 +72,22 @@ if (!fs.existsSync(pkgDir)) {
 }
 
 /**
+ * Derive library name from a package filename by stripping the
+ * trailing _v{version}.hxlibpkg portion.
+ * E.g. "HSLAppsLib_v1.7.hxlibpkg" → "HSLAppsLib"
+ */
+function libNameFromFilename(filename) {
+    const m = filename.match(/^(.+?)_v[\d.]+\.hxlibpkg$/i);
+    return m ? m[1] : filename.replace(/\.hxlibpkg$/i, '');
+}
+
+/**
  * Collect .hxlibpkg files from library subdirectories under packages/.
  * Structure:  packages/<LibraryName>/<file>.hxlibpkg
- * Falls back to flat files in packages/ for backward compatibility.
+ *
+ * If a .hxlibpkg file is found loose in the packages/ root, it is
+ * automatically moved into a subdirectory named after the library
+ * (derived from the filename) so it is cataloged correctly.
  */
 function collectPackageFiles() {
     const results = [];
@@ -89,8 +102,15 @@ function collectPackageFiles() {
                 results.push({ dir: ent.name, file: f, filePath: path.join(subDir, f) });
             }
         } else if (ent.name.toLowerCase().endsWith('.hxlibpkg')) {
-            // Backward compatibility: flat file in packages/
-            results.push({ dir: null, file: ent.name, filePath: path.join(pkgDir, ent.name) });
+            // Auto-organize: move flat file into a library subdirectory
+            const libDir = libNameFromFilename(ent.name);
+            const destDir = path.join(pkgDir, libDir);
+            if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+            const src = path.join(pkgDir, ent.name);
+            const dest = path.join(destDir, ent.name);
+            fs.renameSync(src, dest);
+            console.log(`MOVE ${ent.name}  →  ${libDir}/${ent.name}`);
+            results.push({ dir: libDir, file: ent.name, filePath: dest });
         }
     }
     return results;
