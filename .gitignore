@@ -1,1 +1,55 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editor/IDE folders
+.vscode/
+.claude/
+.vs/
+.idea/
+
+# Dependencies
 node_modules/
+
+# Build/output folders
+out/
+bin/
+obj/
+dist/
+build/
+
+# Runtime data (created by app, not shipped in installer)
+local/packages/
+local/exports/
+local/installers/
+
+# Installer builds (distributed via GitHub Releases)
+*_Setup.exe
+
+# Generic temp/backup files
+*~
+~*
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.orig
+*.rej
+*.cache
+
+# Logs
+*.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Cache folders
+.cache/
