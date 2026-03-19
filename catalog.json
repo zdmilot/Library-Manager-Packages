@@ -178,8 +178,8 @@
     ]
   },
   {
-    "library_name": "HamiltonVantageCAPCOM",
-    "package_file": "HamiltonVantageCAPCOM_v1.3.8780.14673.hxlibpkg",
+    "library_name": "HamiltonVantageCAP",
+    "package_file": "HamiltonVantageCAP_v1.3.8780.14673.hxlibpkg",
     "version": "1.3.8780.14673",
     "author": "Wiltberger",
     "organization": "Hamilton",
@@ -189,30 +189,26 @@
       "hepa",
       "hood",
       "vantage",
-      "driver"
+      "driver",
+      "fan"
     ],
     "venus_compatibility": "4.5+",
     "github_url": "",
-    "created_date": "2026-03-19T01:26:37.499Z",
+    "created_date": "2026-03-19T02:47:14.494Z",
     "library_image_base64": "",
     "library_image_mime": "",
     "library_files": [
-      "HamiltonVantageCAPCOM.hsl",
-      "Dependencies/Dependencies.hsl"
+      "Hamilton Vantage CAP/HamiltonVantageCAPCOM.hsl",
+      "Hamilton Vantage CAP/Dependencies/Dependencies.hsl"
     ],
     "demo_method_files": [
       "HamiltonVantageCAPCOM/VCAP.hsl",
       "HamiltonVantageCAPCOM/VCAP.med",
       "HamiltonVantageCAPCOM/VCAP.stp",
-      "HamiltonVantageCAPCOM/VCAP_Test.hsl",
-      "HamiltonVantageCAPCOM/VCAP_Test.med",
-      "HamiltonVantageCAPCOM/VCAP_Test.stp",
-      "HamiltonVantageCAPCOM/VCAP UV Test.hsl",
-      "HamiltonVantageCAPCOM/VCAP UV Test.med",
-      "HamiltonVantageCAPCOM/VCAP UV Test.stp"
+      "HamiltonVantageCAPCOM/VCAP.sub"
     ],
     "help_files": [
-      "HamiltonVantageCAPCOM.chm"
+      "Hamilton Vantage CAP/HamiltonVantageCAPCOM.chm"
     ],
     "bin_files": [
       "Hamilton Vantage CAP/HamiltonVantageCAPCOM.dll",
@@ -237,14 +233,14 @@
     ],
     "labware_files": [],
     "com_register_dlls": [],
-    "install_to_library_root": false,
-    "custom_install_subdir": "Hamilton Vantage CAP",
+    "install_to_library_root": true,
+    "custom_install_subdir": "",
     "dependencies": [],
     "versions": [
       {
         "version": "1.3.8780.14673",
-        "package_file": "HamiltonVantageCAPCOM_v1.3.8780.14673.hxlibpkg",
-        "created_date": "2026-03-19T01:26:37.499Z",
+        "package_file": "HamiltonVantageCAP_v1.3.8780.14673.hxlibpkg",
+        "created_date": "2026-03-19T02:47:14.494Z",
         "author": "Wiltberger",
         "organization": "Hamilton",
         "description": "Hamilton Vantage CAP COM Driver v1.3 - Controls the Hamilton Vantage Clean Air Protection (CAP) hood via TCP/IP Ethernet connection. Provides fan speed control, fan on/off, UV light control, environmental sensor readings (temperature, humidity, airflow), current fan speed readback, and error reporting. Communicates over CAN-over-IP transport layer. Includes ComLinkLogger diagnostic tool.",
@@ -253,27 +249,23 @@
           "hepa",
           "hood",
           "vantage",
-          "driver"
+          "driver",
+          "fan"
         ],
         "venus_compatibility": "4.5+",
         "github_url": "",
         "library_files": [
-          "HamiltonVantageCAPCOM.hsl",
-          "Dependencies/Dependencies.hsl"
+          "Hamilton Vantage CAP/HamiltonVantageCAPCOM.hsl",
+          "Hamilton Vantage CAP/Dependencies/Dependencies.hsl"
         ],
         "demo_method_files": [
           "HamiltonVantageCAPCOM/VCAP.hsl",
           "HamiltonVantageCAPCOM/VCAP.med",
           "HamiltonVantageCAPCOM/VCAP.stp",
-          "HamiltonVantageCAPCOM/VCAP_Test.hsl",
-          "HamiltonVantageCAPCOM/VCAP_Test.med",
-          "HamiltonVantageCAPCOM/VCAP_Test.stp",
-          "HamiltonVantageCAPCOM/VCAP UV Test.hsl",
-          "HamiltonVantageCAPCOM/VCAP UV Test.med",
-          "HamiltonVantageCAPCOM/VCAP UV Test.stp"
+          "HamiltonVantageCAPCOM/VCAP.sub"
         ],
         "help_files": [
-          "HamiltonVantageCAPCOM.chm"
+          "Hamilton Vantage CAP/HamiltonVantageCAPCOM.chm"
         ],
         "bin_files": [
           "Hamilton Vantage CAP/HamiltonVantageCAPCOM.dll",
@@ -298,8 +290,8 @@
         ],
         "labware_files": [],
         "com_register_dlls": [],
-        "install_to_library_root": false,
-        "custom_install_subdir": "Hamilton Vantage CAP",
+        "install_to_library_root": true,
+        "custom_install_subdir": "",
         "dependencies": []
       }
     ]
